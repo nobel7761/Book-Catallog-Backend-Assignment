@@ -83,7 +83,53 @@ const getUserById = async (id: string): Promise<User | null> => {
   return result;
 };
 
+const updateSingleUser = async (
+  id: string,
+  data: Partial<User>
+): Promise<User | null> => {
+  const isExists = await prisma.user.findUnique({
+    where: { id },
+  });
+
+  if (!isExists) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User Doesn't Exists");
+  }
+
+  const result = await prisma.user.update({
+    where: { id },
+    data,
+    include: {
+      orders: true,
+      reviewAndRatings: true,
+    },
+  });
+
+  return result;
+};
+
+const deleteSingleUser = async (id: string): Promise<User | null> => {
+  const isExists = await prisma.user.findUnique({
+    where: { id },
+  });
+
+  if (!isExists) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User Doesn't Exists");
+  }
+
+  const result = await prisma.user.delete({
+    where: { id },
+    include: {
+      orders: true,
+      reviewAndRatings: true,
+    },
+  });
+
+  return result;
+};
+
 export const UserService = {
   getAllUsers,
   getUserById,
+  updateSingleUser,
+  deleteSingleUser,
 };
