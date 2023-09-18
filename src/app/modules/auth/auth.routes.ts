@@ -7,8 +7,14 @@ const router = express.Router();
 
 router.post(
   '/signup',
-  validateRequest(AuthValidation.signUpAuthZodSchema),
-  AuthController.signUpAuth
+  validateRequest(AuthValidation.signUpZodSchema),
+  AuthController.signUp
+);
+
+router.post(
+  '/signin',
+  validateRequest(AuthValidation.signInZodSchema),
+  AuthController.signIn
 );
 
 export const AuthRoutes = router;
