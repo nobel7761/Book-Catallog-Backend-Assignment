@@ -1,2 +1,11 @@
+import { z } from 'zod';
 
-// Define your validations here
+const updateUserZodSchema = z.object({
+  body: z.object({
+    title: z.string({ required_error: 'Title is Required' }),
+  }),
+});
+
+export const UserValidation = {
+  updateUserZodSchema,
+};
