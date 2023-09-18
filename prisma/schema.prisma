@@ -10,6 +10,71 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model SampleTable{
+model User {
   id String @id @default(uuid())
+  name String
+  email String
+  password String
+  role UserRole
+  contactNo String
+  address String
+  profileImg String
+
+  reviewAndRatings ReviewAndRating[]
+  orders Order[]
+}
+
+enum UserRole {
+  admin
+  customer
+}
+
+model Category{
+  id String @id @default(uuid())
+  title String
+
+  books Book[]
+}
+
+model Book {
+  id String @id @default(uuid())
+  title String
+  author String
+  price Float
+  genre String
+  publicationDate String
+
+  categoryId String
+  category Category @relation(fields: [categoryId], references: [id])
+
+  reviewAndRatings ReviewAndRating[]
+}
+
+model ReviewAndRating {
+  id String @id @default(uuid())
+  review String
+  rating Int 
+  
+  userId String
+  user User @relation(fields: [userId], references: [id])
+
+  bookId String
+  book Book @relation(fields: [bookId], references: [id])
+}
+
+model Order {
+  id String @id @default(uuid())
+  status Status @default(pending)
+  orderedBooks Json
+  createdAt DateTime @default(now())
+
+  userId String
+  user User @relation(fields: [userId], references: [id])
+
+}
+
+enum Status {
+  pending
+  shipped
+  delivered
 }
