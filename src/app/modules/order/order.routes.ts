@@ -20,4 +20,10 @@ router.get(
   OrderController.getAllOrders
 );
 
+router.get(
+  '/:id',
+  auth(UserRole.admin, UserRole.customer),
+  OrderController.getSingleOrder
+);
+
 export const OrderRoutes = router;
