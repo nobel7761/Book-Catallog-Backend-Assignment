@@ -23,6 +23,25 @@ const createOrder = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getAllOrders = catchAsync(async (req: Request, res: Response) => {
+  const accessToken = req.headers.authorization as string;
+  const decodedToken = jwt.decode(accessToken, { complete: true }) as {
+    payload: JwtPayload;
+  } | null;
+  const id = decodedToken?.payload?.id as string;
+  const role = decodedToken?.payload?.role as string;
+
+  const result = await OrderService.getAllOrders(id, role);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Orders retrieved successfully',
+    data: result,
+  });
+});
+
 export const OrderController = {
   createOrder,
+  getAllOrders,
 };
