@@ -14,11 +14,7 @@ router.post(
   OrderController.createOrder
 );
 
-router.get(
-  '/',
-  auth(UserRole.admin, UserRole.customer),
-  OrderController.getAllOrders
-);
+router.get('/', auth(UserRole.admin), OrderController.getAllOrders);
 
 router.get(
   '/:id',
