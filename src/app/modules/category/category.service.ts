@@ -21,7 +21,7 @@ const getAllCategories = async (
   filters: ICategoryFilterRequest,
   options: IPaginationOptions
 ): Promise<IGenericResponse<Category[]>> => {
-  const { limit, page, skip } = paginationHelpers.calculatePagination(options);
+  const { size, page, skip } = paginationHelpers.calculatePagination(options);
   const { searchTerm, ...filtersData } = filters;
 
   const andConditions = [];
@@ -56,7 +56,7 @@ const getAllCategories = async (
     include: {
       books: true,
     },
-    take: limit,
+    take: size,
     orderBy:
       options.sortBy && options.sortOrder
         ? { [options.sortBy]: options.sortOrder }
@@ -68,7 +68,7 @@ const getAllCategories = async (
     meta: {
       total,
       page,
-      limit,
+      size,
     },
     data: result,
   };

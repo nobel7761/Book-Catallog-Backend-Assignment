@@ -20,24 +20,40 @@ const createBook = async (data: Book): Promise<Book> => {
   return result;
 };
 
-const getAllCategories = async (
+const getAllBooks = async (
   filters: IBookFilterRequest,
   options: IPaginationOptions
 ): Promise<IGenericResponse<Book[]>> => {
-  const { limit, page, skip } = paginationHelpers.calculatePagination(options);
-  const { searchTerm, ...filtersData } = filters;
+  const { size, page, skip } = paginationHelpers.calculatePagination(options);
+  const { search, category, minPrice, maxPrice, ...filtersData } = filters;
 
   const andConditions = [];
 
-  if (searchTerm) {
+  if (search) {
     andConditions.push({
       OR: BookSearchableFields.map(field => ({
         [field]: {
-          contains: searchTerm,
+          contains: search,
           mode: 'insensitive',
         },
       })),
     });
+  }
+
+  if (category) {
+    andConditions.push({
+      categoryId: {
+        equals: category,
+      },
+    });
+  }
+
+  if (minPrice !== undefined) {
+    andConditions.push({ price: { gte: Number(minPrice) } });
+  }
+
+  if (maxPrice !== undefined) {
+    andConditions.push({ price: { lte: Number(maxPrice) } });
   }
 
   if (Object.keys(filtersData).length > 0) {
@@ -60,7 +76,7 @@ const getAllCategories = async (
       category: true,
       reviewAndRatings: true,
     },
-    take: limit,
+    take: size,
     orderBy:
       options.sortBy && options.sortOrder
         ? { [options.sortBy]: options.sortOrder }
@@ -72,7 +88,7 @@ const getAllCategories = async (
     meta: {
       total,
       page,
-      limit,
+      size,
     },
     data: result,
   };
@@ -158,7 +174,7 @@ const deleteSingleBook = async (id: string): Promise<Book | null> => {
 
 export const BookService = {
   createBook,
-  getAllCategories,
+  getAllBooks,
   getBookById,
   getBookByCategoryId,
   updateSingleBook,

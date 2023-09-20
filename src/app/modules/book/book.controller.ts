@@ -19,11 +19,11 @@ const createBook = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const getAllCategories = catchAsync(async (req: Request, res: Response) => {
+const getAllBooks = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, BookFilterAbleFileds);
   const options = pick(req.query, paginationFields);
 
-  const result = await BookService.getAllCategories(filters, options);
+  const result = await BookService.getAllBooks(filters, options);
 
   sendResponse<Book[]>(res, {
     statusCode: httpStatus.OK,
@@ -85,7 +85,7 @@ const deleteSingleBook = catchAsync(async (req: Request, res: Response) => {
 
 export const BookController = {
   createBook,
-  getAllCategories,
+  getAllBooks,
   getBookById,
   getBookByCategoryId,
   updateSingleBook,
