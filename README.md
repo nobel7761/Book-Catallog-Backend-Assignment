@@ -1,57 +1,35 @@
-# Express TypeScript Prisma PostgreSQL Starter
+### Live Link: https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/
 
-This guide will walk you through the process of setting up a Starter project. By following these steps, you will clone the project, install dependencies, and configure Prisma for database management. Let's get started!
+### Application Routes:
 
-## Installation Steps
+#### User
 
-### Follow these steps to clone and set up starter project:
+- [api/v1/auth/signup](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/auth/signup) (POST)
+- [api/v1/users](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/users) (GET)
+- [api/v1/users/9bda3c7a-a3cf-4dd5-ab10-d368d0862ae1](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/users/9bda3c7a-a3cf-4dd5-ab10-d368d0862ae1) (Single GET) Include an id that is saved in your database
+- [api/v1/users/9bda3c7a-a3cf-4dd5-ab10-d368d0862ae1](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/users/9bda3c7a-a3cf-4dd5-ab10-d368d0862ae1) (PATCH)
+- [api/v1/users/9bda3c7a-a3cf-4dd5-ab10-d368d0862ae1](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/users/9bda3c7a-a3cf-4dd5-ab10-d368d0862ae1) (DELETE) Include an id that is saved in your database
+- [api/v1/profile](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/) (GET)
 
-1. `Clone the project:` Open your terminal or command prompt and run the following command to clone the project repository:
+### Category
 
-```bash
-git clone https://github.com/nobel7761/Starter-Express-TypeScript-Prisma-PostgreSQL.git
-```
+- [api/v1/categories/create-category](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/categories/create-category) (POST)
+- [api/v1/categories](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/categories) (GET)
+- [api/v1/categories/9b85b828-b12f-4328-a049-d79022ce37ca](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/categories/9b85b828-b12f-4328-a049-d79022ce37ca) (Single GET) Include an id that is saved in your database
+- [api/v1/categories/9b85b828-b12f-4328-a049-d79022ce37ca](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/categories/9b85b828-b12f-4328-a049-d79022ce37ca) (PATCH)
+- [api/v1/categories/9b85b828-b12f-4328-a049-d79022ce37ca](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/categories/9b85b828-b12f-4328-a049-d79022ce37ca) (DELETE) Include an id that is saved in your database
 
-2. `Navigate into the project directory:` Use the cd command to navigate into the project directory:
+### Books
 
-```bash
-cd Starter-Express-TypeScript-Prisma-PostgreSQL
-```
+- [api/v1/books/create-book](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/books/create-book) (POST)
+- [api/v1/books](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/books) (GET)
+- [api/v1/books/9b85b828-b12f-4328-a049-d79022ce37ca/category](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/books/9b85b828-b12f-4328-a049-d79022ce37ca/category) (GET)
+- [api/v1/books/6466bdf2-8698-420e-bfcc-6fc2bacdcce5](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/books/6466bdf2-8698-420e-bfcc-6fc2bacdcce5) (GET)
+- [api/v1/books/6466bdf2-8698-420e-bfcc-6fc2bacdcce5](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/books/6466bdf2-8698-420e-bfcc-6fc2bacdcce5) (PATCH)
+- [api/v1/books/6466bdf2-8698-420e-bfcc-6fc2bacdcce5](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/books/6466bdf2-8698-420e-bfcc-6fc2bacdcce5) (DELETE)
 
-3. `Install project dependencies:` Next, install the project dependencies by running the following command:
+### Orders
 
-```bash
-yarn install
-```
-
-### Creating the database schema
-
-4. Migrate the database schema: Use the following command to create and apply the initial database schema:
-
-```bash
-npx prisma migrate dev --name init
-```
-
-This command creates a new migration file based on your schema changes and applies it to your database.
-
-5. `Generate Prisma Client:` Generate the Prisma Client by running the following command:
-
-```bash
-npx prisma generate
-```
-
-This command generates the Prisma Client, which provides an interface to interact with your database.
-
-### Note (If Prisma Client Does Not Installed Before)
-
-`Install Prisma Client:` Install the Prisma Client library by running the following command:
-
-```bash
-yarn add @prisma/client
-```
-
-This command installs the Prisma Client, which provides an interface to interact with your database.
-
-That's it! You have successfully set up the Express TypeScript Prisma PostgreSQL Starter project. You can now start exploring and working with the codebase. Refer to the project documentation or README for further instructions on how to run and use the core service.
-
-Happy coding!
+- [api/v1/orders/create-order](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/orders/create-order) (POST)
+- [api/v1/orders](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/orders) (GET)
+- [api/v1/orders/094bd3c0-0441-47c5-b352-7cfbda11905e](https://book-catalog-prisma-postgres-p9qyovups-nobel7761.vercel.app/api/v1/orders/094bd3c0-0441-47c5-b352-7cfbda11905e) (GET)
