@@ -61,6 +61,7 @@ const updateSingleUser = catchAsync(async (req: Request, res: Response) => {
 
 const deleteSingleUser = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
+  console.log(id);
   const result = await UserService.deleteSingleUser(id);
 
   sendResponse<User>(res, {

@@ -29,11 +29,11 @@ const signIn = catchAsync(async (req: Request, res: Response) => {
   };
   res.cookie('refreshToken', refreshToken, cookieOptions);
 
-  sendResponse<ILoginUserResponse>(res, {
+  sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'User signin successfully!',
-    data: others,
+    token: others.accessToken,
   });
 });
 
